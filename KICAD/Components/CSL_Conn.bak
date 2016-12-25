@@ -1,0 +1,22 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# WM1386x04
+#
+DEF WM1386x04 C 0 40 Y Y 1 F N
+F0 "C" 50 -200 39 H V C CNN
+F1 "WM1386x04" -200 150 39 H V C CNN
+F2 "" 0 -100 60 H I C CNN
+F3 "" 0 -100 60 H I C CNN
+DRAW
+S -75 75 50 -125 0 1 0 N
+X ~ 1 -150 50 71 R 20 50 1 1 I
+X ~ 2 -150 0 71 R 20 50 1 1 I
+X ~ 3 -150 -50 71 R 20 50 1 1 I
+X ~ 4 -150 -100 71 R 20 50 1 1 I
+X ~ 5 0 -125 0 R 20 79 1 1 I
+X ~ 5 0 75 0 R 20 79 1 1 I
+ENDDRAW
+ENDDEF
+#
+#End Library
