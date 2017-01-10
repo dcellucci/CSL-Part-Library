@@ -1,0 +1,34 @@
+###############################################################
+# Syntax Coloring Map for SparkFun LP55231 LED DRIVER Library #
+###############################################################
+# Class
+###################################################################
+
+Lp5521	KEYWORD1
+
+###################################################################
+# Methods and Functions
+###################################################################
+
+Begin	KEYWORD2
+Enable	KEYWORD2
+Disable	KEYWORD2
+Reset	KEYWORD2
+SetChannelPWM	KEYWORD2
+SetMasterFader	KEYWORD2
+SetLogBrightness	KEYWORD2
+SetDriveCurrent	KEYWORD2
+
+###################################################################
+# Constants
+###################################################################
+
+LP_ERR_NONE	LITERAL1
+LP_ERR_INVALID_CHANNEL	LITERAL1
+LP_ERR_INVALID_FADER	LITERAL1
+LP_ERR_INVALID_ENGINE	LITERAL1
+LP_ERR_PROGRAM_LENGTH	LITERAL1
+LP_ERR_PROGRAM_VALIDATION	LITERAL1
+LP_ERR_PROGRAM_PC	LITERAL1
+LP_ERR_GPIO_OFF	LITERAL1
+

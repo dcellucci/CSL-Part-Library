@@ -1,6 +1,10 @@
-update=Wednesday, January 04, 2017 'PMt' 03:36:50 PM
+update=Wednesday, December 28, 2016 'PMt' 11:22:10 PM
 version=1
 last_client=eeschema
+[general]
+version=1
+RootSch=
+BoardNm=
 [pcbnew]
 version=1
 LastNetListRead=
@@ -23,11 +27,9 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
-[general]
-version=1
 [eeschema]
 version=1
-LibDir=../../Components
+LibDir=/Users/dcellucci/github/CSL-Part-Library/KICAD/Components
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -58,9 +60,9 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=/Users/dcellucci/github/CSL-Part-Library/KICAD/Components/Fab
-LibName31=/Users/dcellucci/github/CSL-Part-Library/KICAD/Components/CSL_uP
-LibName32=/Users/dcellucci/github/CSL-Part-Library/KICAD/Components/CSL_Sensors
-LibName33=/Users/dcellucci/github/CSL-Part-Library/KICAD/Components/CSL_Power
-LibName34=/Users/dcellucci/github/CSL-Part-Library/KICAD/Components/CSL_Conn
-LibName35=/Users/dcellucci/github/CSL-Part-Library/KICAD/Components/CSL_Opto
+LibName30=CSL_uP
+LibName31=Fab
+LibName32=CSL_Sensors
+LibName33=CSL_Conn
+LibName34=CSL_Opto
+LibName35=CSL_Power
