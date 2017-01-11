@@ -1,0 +1,458 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:Fab
+LIBS:CSL_Power
+LIBS:CSL_Conn
+LIBS:CSL_uP
+LIBS:CSL_Sensors
+LIBS:CSL_Opto
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L AVRISP U2
+U 1 1 58752CF4
+P 1800 5700
+F 0 "U2" H 2000 5450 60  0000 C CNN
+F 1 "AVRISP" H 1700 5950 60  0000 C CNN
+F 2 "_Fab_Footprint:SMD-Header-3x2" H 1750 5700 60  0001 C CNN
+F 3 "" H 1750 5700 60  0001 C CNN
+	1    1800 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L ATMEGA328PB U1
+U 1 1 58754A61
+P 1750 3100
+F 0 "U1" H 2400 1450 60  0000 C CNN
+F 1 "ATMEGA328PB" H 1450 4800 60  0000 C CNN
+F 2 "_Fab_Footprint:TQFP-32-Fab" H 2050 4000 60  0001 C CNN
+F 3 "" H 2050 4000 60  0001 C CNN
+	1    1750 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	800  4400 1050 4400
+Wire Wire Line
+	950  2950 950  4800
+Wire Wire Line
+	1050 4500 950  4500
+Connection ~ 950  4500
+Wire Wire Line
+	1050 4600 950  4600
+Connection ~ 950  4600
+$Comp
+L GND #PWR01
+U 1 1 58754B34
+P 950 4800
+F 0 "#PWR01" H 950 4550 60  0001 C CNN
+F 1 "GND" H 950 4650 60  0000 C CNN
+F 2 "" H 950 4800 60  0000 C CNN
+F 3 "" H 950 4800 60  0000 C CNN
+	1    950  4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1050 1750 950  1750
+Wire Wire Line
+	950  1750 950  2750
+$Comp
+L CAP C2
+U 1 1 58754B8C
+P 950 2850
+F 0 "C2" H 1000 2775 20  0000 C CNN
+F 1 "0.1uF" H 950 2850 20  0000 C CNN
+F 2 "_Fab_Footprint:CAP_1206_FAB" H 950 2850 60  0001 C CNN
+F 3 "" H 950 2850 60  0001 C CNN
+	1    950  2850
+	1    0    0    -1  
+$EndComp
+Connection ~ 950  4400
+Wire Wire Line
+	950  1650 1050 1650
+Wire Wire Line
+	950  1350 950  1650
+Wire Wire Line
+	800  1550 1050 1550
+Connection ~ 950  1550
+$Comp
+L SW_PUSH SW1
+U 1 1 58754C6B
+P 3550 1500
+F 0 "SW1" H 3700 1610 50  0000 C CNN
+F 1 "SW_PUSH" H 3550 1420 50  0000 C CNN
+F 2 "_Fab_Footprint:Switch-Tactile-B3SN-3112P" H 3550 1500 60  0001 C CNN
+F 3 "" H 3550 1500 60  0000 C CNN
+	1    3550 1500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2550 1550 3250 1550
+Wire Wire Line
+	3200 1450 3200 1550
+Wire Wire Line
+	3200 1500 3250 1500
+Wire Wire Line
+	3850 1550 3900 1550
+Wire Wire Line
+	3900 1500 3900 1800
+Wire Wire Line
+	3900 1500 3850 1500
+Connection ~ 3200 1550
+Connection ~ 3900 1550
+$Comp
+L GND #PWR02
+U 1 1 58755300
+P 3900 1800
+F 0 "#PWR02" H 3900 1550 60  0001 C CNN
+F 1 "GND" H 3900 1650 60  0000 C CNN
+F 2 "" H 3900 1800 60  0000 C CNN
+F 3 "" H 3900 1800 60  0000 C CNN
+	1    3900 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L CAP C3
+U 1 1 5875533A
+P 3050 1350
+F 0 "C3" H 3100 1275 20  0000 C CNN
+F 1 "0.1uF" H 3050 1350 20  0000 C CNN
+F 2 "_Fab_Footprint:CAP_1206_FAB" H 3050 1350 60  0001 C CNN
+F 3 "" H 3050 1350 60  0001 C CNN
+	1    3050 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L RES R2
+U 1 1 5875536B
+P 3200 1350
+F 0 "R2" H 3250 1275 20  0000 C CNN
+F 1 "10k" V 3200 1350 20  0000 C CNN
+F 2 "_Fab_Footprint:CAP_1206_FAB" H 3200 1350 60  0001 C CNN
+F 3 "" H 3200 1350 60  0001 C CNN
+	1    3200 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3050 1550 3050 1450
+Connection ~ 3200 1500
+Connection ~ 3050 1550
+Wire Wire Line
+	3050 1250 3050 1200
+$Comp
+L +5V #PWR03
+U 1 1 58755468
+P 3200 1200
+F 0 "#PWR03" H 3200 1050 60  0001 C CNN
+F 1 "+5V" H 3200 1340 60  0000 C CNN
+F 2 "" H 3200 1200 60  0000 C CNN
+F 3 "" H 3200 1200 60  0000 C CNN
+	1    3200 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L +5V #PWR04
+U 1 1 5875548C
+P 950 1350
+F 0 "#PWR04" H 950 1200 60  0001 C CNN
+F 1 "+5V" H 950 1490 60  0000 C CNN
+F 2 "" H 950 1350 60  0000 C CNN
+F 3 "" H 950 1350 60  0000 C CNN
+	1    950  1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3200 1250 3200 1200
+Text GLabel 3050 1200 1    60   Input ~ 0
+DTR
+Text GLabel 2900 2350 2    60   Input ~ 0
+MISO
+Text GLabel 2600 2250 2    60   Input ~ 0
+MOSI
+Text GLabel 2600 2450 2    60   Input ~ 0
+SCK
+Wire Wire Line
+	2550 2250 2600 2250
+Wire Wire Line
+	2550 2350 2900 2350
+Wire Wire Line
+	2550 2450 2600 2450
+Text GLabel 1150 5600 0    60   Input ~ 0
+MISO
+Text GLabel 1400 5700 0    60   Input ~ 0
+SCK
+Text GLabel 2250 5700 2    60   Input ~ 0
+MOSI
+$Comp
+L +5V #PWR05
+U 1 1 58755D54
+P 2200 5550
+F 0 "#PWR05" H 2200 5400 60  0001 C CNN
+F 1 "+5V" H 2200 5690 60  0000 C CNN
+F 2 "" H 2200 5550 60  0000 C CNN
+F 3 "" H 2200 5550 60  0000 C CNN
+	1    2200 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR06
+U 1 1 58755D95
+P 2200 5850
+F 0 "#PWR06" H 2200 5600 60  0001 C CNN
+F 1 "GND" H 2200 5700 60  0000 C CNN
+F 2 "" H 2200 5850 60  0000 C CNN
+F 3 "" H 2200 5850 60  0000 C CNN
+	1    2200 5850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 5800 2200 5800
+Wire Wire Line
+	2200 5800 2200 5850
+Wire Wire Line
+	2150 5600 2200 5600
+Wire Wire Line
+	2200 5600 2200 5550
+Wire Wire Line
+	2150 5700 2250 5700
+Wire Wire Line
+	1450 5600 1150 5600
+Wire Wire Line
+	1450 5700 1400 5700
+Wire Wire Line
+	2850 1550 2850 1200
+Connection ~ 2850 1550
+Text GLabel 2850 1200 1    60   Input ~ 0
+RESET
+Text GLabel 1150 5800 0    60   Input ~ 0
+RESET
+Wire Wire Line
+	1450 5800 1150 5800
+$Comp
+L RES R1
+U 1 1 587563A5
+P 2700 5600
+F 0 "R1" H 2750 5525 20  0000 C CNN
+F 1 "330" V 2700 5600 20  0000 C CNN
+F 2 "_Fab_Footprint:CAP_1206_FAB" H 2700 5600 60  0001 C CNN
+F 3 "" H 2700 5600 60  0001 C CNN
+	1    2700 5600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2700 5700 2700 5750
+$Comp
+L FAB_LED L1
+U 1 1 58756A08
+P 2700 5850
+F 0 "L1" H 2800 5800 20  0000 C CNN
+F 1 "FAB_LED" H 2625 5925 20  0000 C CNN
+F 2 "_Fab_Footprint:LED_1206_FAB" H 2700 5875 60  0001 C CNN
+F 3 "" H 2700 5875 60  0001 C CNN
+	1    2700 5850
+	-1   0    0    1   
+$EndComp
+Text GLabel 2700 5450 1    60   Input ~ 0
+SCK
+$Comp
+L GND #PWR07
+U 1 1 58756C32
+P 2700 6000
+F 0 "#PWR07" H 2700 5750 60  0001 C CNN
+F 1 "GND" H 2700 5850 60  0000 C CNN
+F 2 "" H 2700 6000 60  0000 C CNN
+F 3 "" H 2700 6000 60  0000 C CNN
+	1    2700 6000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2700 5450 2700 5500
+Wire Wire Line
+	2700 5950 2700 6000
+$Comp
+L RESONATOR O1
+U 1 1 58757467
+P 2750 1750
+F 0 "O1" H 2850 1600 60  0000 C CNN
+F 1 "RESONATOR" H 2600 1850 60  0000 C CNN
+F 2 "_Fab_Footprint:RESONATOR" H 2750 1750 60  0001 C CNN
+F 3 "" H 2750 1750 60  0001 C CNN
+	1    2750 1750
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2750 1850 2750 1900
+Wire Wire Line
+	2750 1900 2600 1900
+Wire Wire Line
+	2600 1900 2600 1800
+Wire Wire Line
+	2600 1800 2550 1800
+Wire Wire Line
+	2550 1700 2600 1700
+Wire Wire Line
+	2600 1700 2600 1600
+Wire Wire Line
+	2600 1600 2750 1600
+Wire Wire Line
+	2750 1600 2750 1650
+Wire Wire Line
+	2850 1750 3900 1750
+Connection ~ 3900 1750
+Text GLabel 2600 2700 2    60   Input ~ 0
+RX
+Text GLabel 2800 2600 2    60   Input ~ 0
+TX
+Wire Wire Line
+	2550 2600 2800 2600
+Wire Wire Line
+	2550 2700 2600 2700
+$Comp
+L FTDI U3
+U 1 1 58757BC1
+P 1850 6650
+F 0 "U3" H 2000 6300 60  0000 C CNN
+F 1 "FTDI" H 1900 7000 60  0000 C CNN
+F 2 "_Fab_Footprint:SMD_RA_1x06_No_Holes" H 1850 6700 60  0001 C CNN
+F 3 "" H 1850 6700 60  0001 C CNN
+	1    1850 6650
+	1    0    0    -1  
+$EndComp
+Text GLabel 1400 6700 0    60   Input ~ 0
+RX
+Text GLabel 1550 6800 0    60   Input ~ 0
+TX
+Wire Wire Line
+	1600 6800 1550 6800
+Wire Wire Line
+	1600 6700 1400 6700
+Text GLabel 1400 6900 0    60   Input ~ 0
+DTR
+Wire Wire Line
+	1600 6900 1400 6900
+$Comp
+L +5V #PWR08
+U 1 1 5875822D
+P 1150 6300
+F 0 "#PWR08" H 1150 6150 60  0001 C CNN
+F 1 "+5V" H 1150 6440 60  0000 C CNN
+F 2 "" H 1150 6300 60  0000 C CNN
+F 3 "" H 1150 6300 60  0000 C CNN
+	1    1150 6300
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR09
+U 1 1 58758260
+P 900 6550
+F 0 "#PWR09" H 900 6300 60  0001 C CNN
+F 1 "GND" H 900 6400 60  0000 C CNN
+F 2 "" H 900 6550 60  0000 C CNN
+F 3 "" H 900 6550 60  0000 C CNN
+	1    900  6550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1600 6400 900  6400
+Wire Wire Line
+	900  6400 900  6550
+Wire Wire Line
+	1150 6300 1150 6600
+Wire Wire Line
+	1150 6600 1600 6600
+$Comp
+L CAP C1
+U 1 1 5875847E
+P 800 2850
+F 0 "C1" H 850 2775 20  0000 C CNN
+F 1 "0.1uF" H 800 2850 20  0000 C CNN
+F 2 "_Fab_Footprint:CAP_1206_FAB" H 800 2850 60  0001 C CNN
+F 3 "" H 800 2850 60  0001 C CNN
+	1    800  2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	800  1550 800  2750
+Wire Wire Line
+	800  2950 800  4400
+Wire Wire Line
+	2550 3200 3100 3200
+Wire Wire Line
+	3100 3200 3100 3250
+$Comp
+L RES R?
+U 1 1 58758E84
+P 3100 3350
+F 0 "R?" H 3150 3275 20  0000 C CNN
+F 1 "330" V 3100 3350 20  0000 C CNN
+F 2 "_Fab_Footprint:CAP_1206_FAB" H 3100 3350 60  0001 C CNN
+F 3 "" H 3100 3350 60  0001 C CNN
+	1    3100 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 58758ECC
+P 3100 3950
+F 0 "#PWR?" H 3100 3700 60  0001 C CNN
+F 1 "GND" H 3100 3800 60  0000 C CNN
+F 2 "" H 3100 3950 60  0000 C CNN
+F 3 "" H 3100 3950 60  0000 C CNN
+	1    3100 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L FAB_LED L?
+U 1 1 58758EFB
+P 3100 3650
+F 0 "L?" H 3200 3600 20  0000 C CNN
+F 1 "FAB_LED" H 3025 3725 20  0000 C CNN
+F 2 "_Fab_Footprint:LED_1206_FAB" H 3100 3675 60  0001 C CNN
+F 3 "" H 3100 3675 60  0001 C CNN
+	1    3100 3650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3100 3450 3100 3550
+Wire Wire Line
+	3100 3750 3100 3950
+$EndSCHEMATC
