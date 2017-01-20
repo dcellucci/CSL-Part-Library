@@ -3,7 +3,7 @@
   (general
     (links 41)
     (no_connects 2)
-    (area 78 90 122.000001 112.309524)
+    (area 63.150001 89 122.000001 118.700001)
     (thickness 1.6)
     (drawings 7)
     (tracks 125)
@@ -82,8 +82,8 @@
       (hpglpenoverlay 2)
       (psnegative false)
       (psa4output false)
-      (plotreference true)
-      (plotvalue true)
+      (plotreference false)
+      (plotvalue false)
       (plotinvisibletext false)
       (padsonsilk false)
       (subtractmaskfromsilk false)
@@ -91,7 +91,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory ""))
+      (outputdirectory CAM/))
   )
 
   (net 0 "")

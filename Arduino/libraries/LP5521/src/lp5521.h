@@ -32,31 +32,28 @@ Distributed as-is; no warranty is given.
 
 #include <stdint.h>
 
-#define LED_R 0
-#define LED_G 1
-#define LED_B 2
+
+struct coefficients
+{
+  uint32_t c0,
+  uint32_t c1,
+  uint32_t c00,
+  uint32_t c10,
+  uint32_t c11,
+  uint32_t c20,
+  uint32_t c21,
+  uint32_t c30,
+};
+
+
 
 class Lp5521
 {
 public:
   Lp5521(uint8_t address = 0x64);
 
-  // values for dimensioning and input validation
-  static const uint8_t NumChannels = 3;
-  static const uint8_t NumEngines = 1;
-  static const uint8_t NumInstructions = 96;
+  coefficients *coeff
 
-  enum lp_err_code
-  {
-    LP_ERR_NONE = 0,
-    LP_ERR_INVALID_CHANNEL,
-    LP_ERR_INVALID_FADER,
-    LP_ERR_INVALID_ENGINE,
-    LP_ERR_PROGRAM_LENGTH,
-    LP_ERR_PROGRAM_VALIDATION,
-    LP_ERR_PROGRAM_PC,
-    LP_ERR_GPIO_OFF
-  };
 
   // Initialization routines
   void Begin();
