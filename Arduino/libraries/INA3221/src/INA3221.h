@@ -1,8 +1,9 @@
 /*----------------------------------------------------------
   @DESCRIPTION : INA3221 driver
-  
+
   @DATASHEET   : http://www.ti.com/lit/ds/sbos576b/sbos576b.pdf
 ----------------------------------------------------------*/
+
 
 // INA3221 ADDRESS PINS AND SLAVE ADDRESSES
 // |----------|---------------|
@@ -27,9 +28,13 @@
   @Functions
 ----------------------------------------------------------*/
 
+#ifndef _INA3221_H_
+#define _INA3221_H_
+
 class INA3221
 {
 public:
+<<<<<<< HEAD
 	INA3221(uint8_t address = INA3221_ADDR);
 
 	void init();
