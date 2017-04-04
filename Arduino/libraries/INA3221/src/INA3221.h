@@ -34,7 +34,6 @@
 class INA3221
 {
 public:
-<<<<<<< HEAD
 	INA3221(uint8_t address = INA3221_ADDR);
 
 	void init();
