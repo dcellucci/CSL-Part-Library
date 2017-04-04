@@ -33,6 +33,7 @@ Distributed as-is; no warranty is given.
 #include <stdint.h>
 
 
+/*
 struct coefficients
 {
   uint32_t c0,
@@ -44,16 +45,28 @@ struct coefficients
   uint32_t c21,
   uint32_t c30,
 };
+*/
 
 
 
 class Lp5521
 {
 public:
-  Lp5521(uint8_t address = 0x64);
+  Lp5521(uint8_t address = 0x32);
 
-  coefficients *coeff
+  //coefficients *coeff;
 
+  enum lp_err_code
+  {
+    LP_ERR_NONE = 0,
+    LP_ERR_INVALID_CHANNEL,
+    LP_ERR_INVALID_FADER,
+    LP_ERR_INVALID_ENGINE,
+    LP_ERR_PROGRAM_LENGTH,
+    LP_ERR_PROGRAM_VALIDATION,
+    LP_ERR_PROGRAM_PC,
+    LP_ERR_GPIO_OFF
+  };
 
   // Initialization routines
   void Begin();
@@ -79,6 +92,7 @@ protected:
 
   // private data
   uint8_t _address;
+  uint8_t NumChannels = 3;
 
 };
 

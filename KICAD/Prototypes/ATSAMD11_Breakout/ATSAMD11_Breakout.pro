@@ -1,6 +1,6 @@
-update=Wednesday, December 28, 2016 'PMt' 11:22:10 PM
+update=Saturday, February 18, 2017 'PMt' 12:24:26 PM
 version=1
-last_client=eeschema
+last_client=kicad
 [general]
 version=1
 RootSch=
@@ -66,3 +66,13 @@ LibName32=CSL_Sensors
 LibName33=CSL_Conn
 LibName34=CSL_Opto
 LibName35=CSL_Power
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60

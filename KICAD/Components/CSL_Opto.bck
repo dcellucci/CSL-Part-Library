@@ -1,5 +1,10 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP LED_RGB_CC
+D Common Cathode RGB LED
+K RGB LED
+$ENDCMP
+#
 $CMP LP5521YQ
 D 3 channel RGB/White LED driver with internal program memory and integrated charge pump
 $ENDCMP
