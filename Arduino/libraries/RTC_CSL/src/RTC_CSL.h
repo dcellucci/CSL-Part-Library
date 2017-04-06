@@ -41,7 +41,6 @@ public:
     configureClock();
     return _configured;
   }
-
   uint32_t getCount();
   void setCount(uint32_t newCount);
 

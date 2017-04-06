@@ -21,14 +21,12 @@
 
 #include "RTC_CSL.h"
 
-#define EPOCH_TIME_OFF      946684800  // This is 1st January 2000, 00:00:00 in epoch time
-#define EPOCH_TIME_YEAR_OFF 100        // years since 1900
-
 voidFuncPtr RTC_callBack = NULL;
 
 RTC_CSL::RTC_CSL()
 {
   _configured = false;
+
 }
 
 void RTC_CSL::begin(bool resetTime)
@@ -36,7 +34,9 @@ void RTC_CSL::begin(bool resetTime)
   uint16_t tmp_reg = 0;
 
   PM->APBAMASK.reg |= PM_APBAMASK_RTC; // turn on digital interface clock
-  config32kOSC();
+
+  //We should only do this if we haven't configured a 32k oscillator already
+  //config32kOSC();
 
   // If the RTC is in clock mode and the reset was
   // not due to POR or BOD, preserve the clock time
@@ -52,6 +52,7 @@ void RTC_CSL::begin(bool resetTime)
   }
 
   // Setup clock GCLK2 with OSC32K divided by 32
+  //And here as well...
   configureClock();
 
   RTCdisable();
@@ -69,13 +70,13 @@ void RTC_CSL::begin(bool resetTime)
   while (RTCisSyncing())
     ;
 
-  NVIC_EnableIRQ(RTC_IRQn); // enable RTC interrupt
-  NVIC_SetPriority(RTC_IRQn, 0x00);
+  //NVIC_EnableIRQ(RTC_IRQn); // enable RTC interrupt
+  //NVIC_SetPriority(RTC_IRQn, 0x00);
 
-  RTC->MODE0.INTENSET.reg |= RTC_MODE0_INTENSET_CMP0; // enable alarm interrupt
+  //RTC->MODE0.INTENSET.reg |= RTC_MODE0_INTENSET_CMP0; // enable alarm interrupt
 
-  while (RTCisSyncing())
-    ;
+  //while (RTCisSyncing())
+  //  ;
 
   RTCenable();
   RTCresetRemove();
@@ -97,6 +98,7 @@ void RTC_CSL::begin(bool resetTime)
 //
 
 uint32_t RTC_CSL::getCount(){
+  RTCreadRequest();
   return RTC->MODE0.COUNT.bit.COUNT;
 }
 
@@ -137,13 +139,13 @@ void RTC_CSL::standbyMode()
 
 /* Attach peripheral clock to 32k oscillator */
 void RTC_CSL::configureClock() {
-  GCLK->GENDIV.reg = GCLK_GENDIV_ID(2)|GCLK_GENDIV_DIV(4);
-  while (GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY)
-    ;
-  GCLK->GENCTRL.reg = (GCLK_GENCTRL_GENEN | GCLK_GENCTRL_SRC_XOSC32K | GCLK_GENCTRL_ID(2) | GCLK_GENCTRL_DIVSEL );
-  while (GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY)
-    ;
-  GCLK->CLKCTRL.reg = (uint32_t)((GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK2 | (RTC_GCLK_ID << GCLK_CLKCTRL_ID_Pos)));
+  //GCLK->GENDIV.reg = GCLK_GENDIV_ID(2)|GCLK_GENDIV_DIV(0);
+  //while (GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY)
+  //  ;
+  //GCLK->GENCTRL.reg = (GCLK_GENCTRL_GENEN | GCLK_GENCTRL_SRC_XOSC32K | GCLK_GENCTRL_ID(4));// | GCLK_GENCTRL_DIVSEL );
+  //while (GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY)
+  //  ;
+  GCLK->CLKCTRL.reg = (uint32_t)((GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK1 | (RTC_GCLK_ID << GCLK_CLKCTRL_ID_Pos)));
   while (GCLK->STATUS.bit.SYNCBUSY)
     ;
 }
