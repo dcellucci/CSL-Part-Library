@@ -5,20 +5,12 @@
 // asynchronous packet automata networking
 //
 // Neil Gershenfeld
-//
 // CBA MIT 12/4/11
 //
-// (c) Massachusetts Institute of Technology 2011
-// Permission granted for experimental and personal use;
-// license for commercial sale available from MIT.
+// Additions by Daniel Cellucci
+// NASA Ames Research Center 4/22/17
 //
-// todo
-//    flood route
-//    rejected handshakes
-//    bridge serial error checking
-//    merge bridge port scan
-//    adaptive bit timing
-//
+
 //
 // includes
 //
@@ -153,175 +145,167 @@ void apa_move_packet(struct apa_port_type *port0, struct apa_port_type *port1) {
 }
 
 void apa_copy_packet(struct apa_port_type *port0, struct apa_port_type *port1) {
-   //
-   // copy packet from port0 in to port1 out
-   //
-   unsigned char i;
-   //
-   // copy path
-   //
-   for (i = 0; i < port0->path_in_length; ++i)
-      port1->path_out[i] = port0->path_in[i];
-   port1->path_out_length = port0->path_in_length;
-   //
-   // copy payload
-   //
-   for (i = 0; i < port0->payload_in_length; ++i)
-      port1->payload_out[i] = port0->payload_in[i];
-   port1->payload_out_length = port0->payload_in_length;
-   }
+    //
+    // copy packet from port0 in to port1 out
+    //
+
+    //
+    // copy path
+    //
+    strcpy(port1->path_out,port0->path_in);
+    port1->path_out_length = port0->path_in_length;
+    //
+    // copy payload
+    //
+    strcpy(port1->payload_out,port0->payload_in);
+    port1->payload_out_length = port0->payload_in_length;
+}
 
 void apa_port_scan(struct apa_port_type *port) {
-   //
-   // port scan
-   //
-   struct apa_port_type *current_port;
-   //
-   // is an incoming packet waiting?
-   //
-   if (0 != pin_test(*port->pins_in, port->pin_in)) {
-      //
-      // yes, is the input empty?
-      //
-      if (port->path_in_length == 0) {
-         //
-         // yes, accept the packet
-         //
-         apa_get_packet(port);
-         //
-         // was a packet received?
-         //
-         if (port->path_in_length != 0) {
+    //
+    // port scan
+    //
+    struct apa_port_type *current_port;
+    //
+    // is an incoming packet waiting?
+    //
+    if (port->packet_in_length > 0) {
+        //
+        // yes, is the input empty?
+        //
+        if (port->path_in_length == 0) {
             //
-            // yes, route it
+            // yes, accept the packet
             //
-            apa_route_packet(port);
+            apa_get_packet(port);
+            //
+            // was a packet received?
+            //
+            if (port->path_in_length != 0) {
+                //
+                // yes, route it
+                //
+                apa_route_packet(port);
             }
-         }
-      //
-      // no, reject it
-      //
-      }
-   //
-   // is an input packet waiting?
-   //
-   if (port->path_in_length != 0) {
-      //
-      // yes, is the destination here?
-      //
-      if (port->destination == apa_here) {
-         //
-         // yes, is the output empty?
-         //
-         if (port->path_out_length == 0) {
+        }
+        //
+        // no, reject it
+        //
+    }
+    //
+    // is an input packet waiting?
+    //
+    if (port->path_in_length != 0) {
+        //
+        // yes, is the destination here?
+        //
+        if (port->destination == apa_here) {
             //
-            // yes, move packet to output, reverse path, and process
+            // yes, is the output empty?
             //
-            apa_move_packet(port,port);
-            apa_reverse_path(port);
-            apa_process_packet(port);
+            if (port->path_out_length == 0) {
+                //
+                // yes, move packet to output, reverse path, and process
+                //
+                apa_move_packet(port,port);
+                apa_process_packet(port);
             }
-         }
-      //
-      // destination not here, is it a flood?
-      //
-      else if (port->destination == apa_flood) {
-         //
-         // yes, copy to other ports
-         //
-         current_port = port->next_port;
-         while (current_port->id != port->id) {
-            apa_copy_packet(port,current_port);
-            current_port = current_port->next_port;
+        }
+        //
+        // destination not here, is it a flood?
+        //
+        else if (port->destination == apa_flood) {
+            //
+            // yes, copy to other ports
+            //
+//
+// NB: it is possible that the flood fails to propagate b/c the port already
+// has a packet in its input buffer.
+// The current version results in the packet just not being copied.
+//
+            current_port = port->next_port;
+
+            while (current_port->id != port->id) {
+                apa_copy_packet(port,current_port);
+                current_port = current_port->next_port;
             }
-         port->path_in_length = 0;
-         }
-      //
-      // destination not here or flood, loop over other ports
-      //
-      else {
-         current_port = port->next_port;
-         while (1) {
             //
-            // is current port the destination?
+            //clear the path and payload of the original port after flooding
             //
-            if (port->destination == current_port->id) {
-               //
-               // yes, is current port empty?
-               //
-               if (current_port->path_out_length == 0) {
-                  //
-                  // yes, move packet to current port
-                  //
-                  apa_move_packet(port,current_port);
-                  break;
-                  }
-               }
-            //
-            // no, back to same port?
-            //
-            if (port->id == current_port->id) {
-               //
-               // yes, discard invalid path
-               //
-               port->path_in_length = 0;
-               }
-            //
-            // no, go to next port
-            //
-            current_port = current_port->next_port;
+            free(port->path_in);
+            port->path_in = NULL;
+            port->path_in_length = 0;
+
+            free(port->payload_in);
+            port->payload_in = NULL;
+            port->payload_in_length = 0;
+        }
+        //
+        // destination not here or flood, loop over other ports
+        //
+        else {
+            current_port = port->next_port;
+            while (1) {
+                //
+                // is current port the destination?
+                //
+                if (port->destination == current_port->id) {
+                    //
+                    // yes, is current port empty?
+                    //
+                    if (current_port->path_out_length == 0) {
+                        //
+                        // yes, move packet to current port
+                        //
+                        apa_move_packet(port,current_port);
+                        break;
+                    }
+                }
+                //
+                // no, back to same port?
+                //
+                if (port->id == current_port->id) {
+                    //
+                    // yes, discard invalid path
+                    //
+                    free(port->path_in);
+                    port->path_in = NULL;
+                    port->path_in_length = 0;
+                    break;
+                }
+                //
+                // no, go to next port
+                //
+                current_port = current_port->next_port;
             }
-         }
-      }
-   //
-   // is an output packet waiting?
-   //
-   if (port->path_out_length != 0) {
-      //
-      // yes, try to send it
-      //
-      apa_put_packet(port);
-      }
-   }
+        }
+    }
+    //
+    // is an output packet waiting?
+    //
+    if (port->path_out_length != 0) {
+        //
+        // yes, try to send it
+        //
+        apa_put_packet(port);
+    }
+}
 
 void apa_route_packet(struct apa_port_type *port) {
-   //
-   // route packet path and set destination
-   //
-   static unsigned char ptr;
-   //
-   // find pointer
-   //
-   ptr = 0;
-   while (port->path_in[ptr] != apa_pointer)
-      ++ptr;
-   //
-   // check if pointer reached divider
-   //
-   if ((ptr+1) == port->path_in_length) {
-      //
-      // yes, terminate
-      //
-      port->destination = apa_here;
-      }
-   else {
-      //
-      // no, transit
-      //
-      port->destination = port->path_in[ptr+1];
-      port->path_in[ptr] = port->id;
-      port->path_in[ptr+1] = apa_pointer;
-      }
-   }
+    //
+    // route packet path and set destination
+    //
 
-void apa_reverse_path(struct apa_port_type *port) {
-   //
-   // reverse output packet path
-   //
-   static unsigned char i;
-   static unsigned char temp[apa_max_packet];
-   for (i = 0; i < port->path_out_length; ++i)
-      temp[i] = port->path_out[port->path_out_length-i-1];
-   for (i = 0; i < port->path_out_length; ++i)
-      port->path_out[i] = temp[i];
-   }
+    //Check if the packet is at its final destination
+    if(port->path_in[0] == apa_pointer){
+      port->destination = apa_here;
+    }
+    else{
+      //take the next value in the path as the id of the port this needs to go to
+      port->destination = port->path_in[0];
+      //shift all the values in the path_in array over by one
+      memmove(&(port->path_in[0]),&(port->path_in[1]),sizeof(char)*(strlen(port->path_in)-1));
+      //set the last value in the path to the current port ID
+      port->path_in[strlen(port->path_in)-1] = port->id;
+    }
+}

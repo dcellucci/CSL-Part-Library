@@ -61,5 +61,3 @@ void apa_move_packet(struct apa_port_type *port0, struct apa_port_type *port1);
 void apa_copy_packet(struct apa_port_type *port0, struct apa_port_type *port1);
 void apa_port_scan(struct apa_port_type *port);
 void apa_route_packet(struct apa_port_type *port);
-void apa_reverse_path(struct apa_port_type *port);
-uint16_t apa_hex_int(unsigned char *ptr);
